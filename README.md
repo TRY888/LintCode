@@ -1,0 +1,2 @@
+# LintCode
+used for LintCode
