@@ -33,14 +33,14 @@ public:
         {
         	s = newHead;
         	q = newHead->next;
-			while((q != NULL) && (p->val > q->val))
-			{
-				s = q;
-				q = q->next;
-			}
-			s->next = p;
-			temp = p->next;
-			p->next = q;		
+		while((q != NULL) && (p->val > q->val))
+		{
+			s = q;
+			q = q->next;
+		}
+		s->next = p;
+		temp = p->next;
+		p->next = q;		
         	p = temp;
         }
         temp = newHead->next;
