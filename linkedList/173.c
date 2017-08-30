@@ -1,5 +1,5 @@
-﻿/**
- * title:173.链表插入排序
+﻿/*
+ * title：入门-173.链表插入排序
  * desc:用插入排序对链表排序
  * e.g.:Given 1->3->2->0->null, return 0->1->2->3->null
  */
@@ -24,23 +24,28 @@ public:
      */
     ListNode *insertionSortList(ListNode *head) {
         // write your code here
-        ListNode *p,*s,*q;
-        p = head->next;
-        s = head;
-        q = head;
+        ListNode *p,*s,*q,*temp;
+        ListNode *newHead = new ListNode(0);
+        newHead->next = NULL;
+
+        p = head;
         while(p != NULL)
         {
-        	s = head;
-        	q = head;	
+        	s = newHead;
+        	q = newHead->next;
 			while((q != NULL) && (p->val > q->val))
 			{
 				s = q;
 				q = q->next;
 			}
 			s->next = p;
+			temp = p->next;
 			p->next = q;		
-        	p = p->next;
+        	p = temp;
         }
-        return head;
+        temp = newHead->next;
+        delete newHead;
+        newHead = NULL;
+        return temp;
     }
 };
