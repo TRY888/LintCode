@@ -1,0 +1,71 @@
+    
+
+
+
+void insert(ListNode **tail, int x)
+    {
+        ListNode *newNode = new ListNode(x);
+        (*tail)->next = newNode;
+        *tail = newNode;
+    }
+    
+    bool isValFoundInList1(ListNode *head, ListNode **tail, int x)
+    {
+        ListNode *p = head->next;
+        ListNode *s = head;
+        ListNode *temp = NULL;
+        while(p!=NULL)
+        {
+            if(p->val == x)
+            {
+            	if(*tail == p)
+            		*tail = s;
+         		temp = p->next;
+         		s->next= temp;
+         		free(p);
+         		return true;
+            }
+            s = p;
+            p = p->next;
+        }
+        return false;
+    }
+    bool isValFoundInList2(ListNode *head, int x)
+    {
+        ListNode *p = head->next;
+        while(p!=NULL)
+        {
+            if(p->val == x)
+                return true;
+            p = p->next;
+        }
+        return false;
+    }
+    
+
+    ListNode * deleteDuplicates(ListNode *head) {
+        // write your code here
+        ListNode *newHead1 = new ListNode(0);
+        ListNode *newHead2 = new ListNode(0);
+        ListNode *p, *tail1, *tail2;
+        p = head;
+        tail1 = newHead1;
+        tail2 = newHead2;
+        int value;
+        while(p!=NULL)
+        {
+        	value = p->val;
+            if(isValFoundInList1(newHead1, &tail1, value) == true)
+                insert(&tail2, value);
+            else
+            {
+                if(isValFoundInList2(newHead2, value) == false)
+                    insert(&tail1, value);
+            }
+            p = p->next;
+        }
+        p = newHead1->next;
+        delete newHead1;
+        return p;
+        
+    }
