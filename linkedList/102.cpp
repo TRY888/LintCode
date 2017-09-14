@@ -23,6 +23,7 @@ public:
      * @param head: The first node of linked list.
      * @return: True if it has a cycle, or false
      */
+/*
     void insert(ListNode **tail, int addr)
     {
         ListNode *newNode = new ListNode(addr);
@@ -57,6 +58,20 @@ public:
             else
                 insert(&tail, reinterpret_cast<long>(p));
             p = p->next;
+        }
+        return false;
+    }
+*/
+
+    bool hasCycle(ListNode *head) {
+        // write your code here
+        ListNode *fast = head, *slow = head;
+        while(fast!=NULL && fast->next!=NULL)
+        {
+            fast = fast->next->next;
+            slow = slow->next;
+            if(fast == slow)
+                return true;
         }
         return false;
     }
