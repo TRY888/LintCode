@@ -1,0 +1,91 @@
+vector<vector<int>> levelOrderBottom(TreeNode * root) {
+        // write your code here
+        vector<vector<int>> res;
+        
+        queue<TreeNode *> q;
+        int cnt, count;
+        cnt = count = 0;
+        if(root!=NULL)
+        {
+            q.push(root);
+            cnt++;
+            root = q.front();
+            while(root!=NULL)
+            {
+                vector<int> v;
+                v.resize(0);
+                while(cnt>0)
+                {
+                    cnt--;
+                    TreeNode *temp = q.front();
+                    q.pop();
+                    v.push_back(temp->val);
+                    cout << temp->val << " ";
+                    if(temp->left != NULL)
+                    {
+                        q.push(temp->left);
+                        count++;
+                    }
+                    if(temp->right != NULL);
+                    {
+                        q.push(temp->right);
+                        count++;
+                    }
+                }
+                res.insert(res.begin(), v);
+                cnt = count;
+                count = 0;
+                if(q.empty())
+                {
+                    root = NULL;
+                }
+                else
+                {
+                    root = q.front();
+                }
+            }
+        }
+        return res;
+    }
+    // vector<vector<int>> levelOrderBottom(TreeNode * root) {
+    //     // write your code here
+    //     vector<vector<int>> vals;
+    //     queue<TreeNode *> q;
+    //     int cnt = 0,count=0;
+    //     if(root!=NULL)
+    //     {
+    //         q.push(root);
+    //         cnt++;
+    //         root = q.front();
+    //         while(root!=NULL)
+    //         {
+    //             vector<int> v;
+    //             v.resize(0);
+    //             while(cnt>0)
+    //             {
+    //                 cnt--;
+    //                 TreeNode *temp = q.front();
+    //                 q.pop();
+    //                 v.push_back(temp->val);
+    //                 if(temp->left!=NULL)
+    //                 {
+    //                     q.push(temp->left);
+    //                     count++;
+    //                 }
+    //                 if(temp->right!=NULL)
+    //                 {
+    //                     q.push(temp->right);
+    //                     count++;
+    //                 }
+    //             }
+    //             cnt = count;
+    //             count = 0;
+    //             vals.insert(vals.begin(), v);
+    //             if(q.empty())
+    //                 root = NULL;
+    //             else
+    //                 root = q.front();
+    //         }
+    //     }
+    //     return vals;
+    // }
