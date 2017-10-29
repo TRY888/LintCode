@@ -1,0 +1,90 @@
+﻿/**
+ * Definition of TreeNode:
+ * class TreeNode {
+ * public:
+ *     int val;
+ *     TreeNode *left, *right;
+ *     TreeNode(int val) {
+ *         this->val = val;
+ *         this->left = this->right = NULL;
+ *     }
+ * }
+ */
+
+
+class Solution {
+public:
+    /*
+     * @param root: The root of the binary search tree.
+     * @param A: A TreeNode in a Binary.
+     * @param B: A TreeNode in a Binary.
+     * @return: Return the least common ancestor(LCA) of the two nodes.
+     */
+    typedef struct data{
+        TreeNode *father;
+        TreeNode *self;
+    }Data;
+    
+    void getLevelTraverse(TreeNode *root, vector<Data> &res)
+    {
+        queue<TreeNode *> q;
+        int cnt=0, count=0;
+        if(root!=NULL)
+        {
+            q.push(root);
+            Data d;
+            d.self = root;
+            d.father = NULL;
+            res.push_back(d);
+            cnt++;
+            while(root!=NULL)
+            {
+                while(cnt>0)
+                {
+                    cnt--;
+                    TreeNode *temp = q.front();
+                    q.pop();
+                    if(temp->left!=NULL)
+                    {
+                        Data d;
+                        d.self = temp->left;
+                        d.father = temp;
+                        res.push_back(d);
+                        q.push(temp->left);
+                        count++;
+                    }
+                    if(temp->right!=NULL)
+                    {
+                        Data d;
+                        d.self = temp->right;
+                        d.father = temp;
+                        res.push_back(d);
+                        q.push(temp->right);
+                        count++;
+                    }
+                }
+                cnt = count;
+                count = 0;
+                if(q.empty())
+                    root = NULL;
+                else
+                    root = q.front();
+            }
+        }
+    }
+     
+    TreeNode * lowestCommonAncestor(TreeNode * root, TreeNode * A, TreeNode * B)
+    {
+        vector<Data> v;
+        getLevelTraverse(root, v);
+        for(int i=0; i<v.size(); i++)
+        {
+            if(v[i].self == A)
+                break;
+        }
+        
+        
+        return NULL;
+        
+    }
+};
