@@ -1,0 +1,46 @@
+﻿/**
+ * Definition of SegmentTreeNode:
+ * class SegmentTreeNode {
+ * public:
+ *     int start, end, max;
+ *     SegmentTreeNode *left, *right;
+ *     SegmentTreeNode(int start, int end, int max) {
+ *         this->start = start;
+ *         this->end = end;
+ *         this->max = max;
+ *         this->left = this->right = NULL;
+ *     }
+ * }
+ */
+
+
+class Solution {
+public:
+    /*
+     * @param root: The root of segment tree.
+     * @param index: index.
+     * @param value: value
+     * @return: 
+     */
+    void modifyCore(SegmentTreeNode *root, int index, int value, int *max)
+    {
+        if(root!=NULL)
+        {
+            int max_value = INT_MIN;
+            modifyCore(root->left, index, value, &max_value);
+            modifyCore(root->right, index, value, &max_value);
+            if(root->start == root->end)
+            {
+                if(root->start == index)
+                    root->max = value;
+                *max = root->max;
+            }
+            
+        }
+    }
+    void modify(SegmentTreeNode * root, int index, int value) {
+        // write your code here
+        int max = root->max;
+        modifyCore(root, index, value, max);
+    }
+};
