@@ -10,7 +10,7 @@ public:
         // write your code here
         set<int> set_1(nums1.begin(), nums1.end());
         set<int> set_2(nums2.begin(), nums2.end());
-        vector<int> res(nums1.size()+nums2.size(), 0);
+        vector<int> res(nums1.size()>nums2.size()?nums2.size():nums1.size());
         vector<int>::iterator iter_first, iter_last;
         iter_first = res.begin();
         iter_last = set_intersection(set_1.begin(), set_1.end(),
