@@ -70,16 +70,13 @@ public:
         // write your code here
         if(head==NULL || head->next==NULL)
             return NULL;
-        ListNode *fast = head->next;
+        ListNode *fast = head;
         ListNode *slow = head;
-        while(slow!=NULL && fast!=NULL)
+        while(fast!=NULL && fast->next!=NULL)
         {
-            if(fast == slow)
-                break;
             slow = slow->next;
-            if(fast->next!=NULL)
-                fast = fast->next->next;
-            else
+            fast = fast->next->next;
+            if(fast == slow)
                 break;
         }
         if(fast != NULL && fast == slow)
@@ -95,3 +92,4 @@ public:
         return NULL;
     }
 };
+
